@@ -1,0 +1,53 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+  // first sort the array
+     sort(nums.begin(), nums.end());
+     
+     //a vector to hold the indice of the result
+     vector<vector<int>> result;
+  
+
+     for(int i=0; i <=nums.size()-2; i++)
+     {
+        //if the previous element is the same the next one just skip it
+        if(i>0 && nums[i] == nums[i-1] ) continue;
+
+        int left = i+1;
+        int right = nums.size()-1;
+
+       while(left<right)
+       {
+       int sum = nums[i] + nums[left] + nums[right];
+  //if the sum is a negative number increase the left
+        if(sum < 0)
+        {
+            left++;
+        }
+        // if the number is positive the decrease the right element
+        else if(sum >0 )
+        {
+            right--;
+        }
+        else
+        {
+            result.push_back({nums[i], nums[left], nums[right]});
+
+             while(left < right && nums[left] == nums[left+1]) left++;
+       while(left < right && nums[right] == nums[right-1]) right--;
+
+//after skipping the duplications move to the next pointers
+       left++;
+       right--;
+      
+
+        }
+
+       }
+      
+
+     }
+    return result;
+    }
+     
+};
