@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+
+        vector<vector<int>> result;
+        if(numRows==0) return result;
+
+        result.push_back({1});
+        
+        //we will build each row by using the previous one
+        for(int i=1; i<numRows; i++)
+        {
+
+           vector<int> row(i+1, 1);//we create another row i+1 and fill it with 1
+           // through the creation of new rows there will also be middle values
+           //fill the middles values according to the previous row
+           // j represent col
+           for(int j=1; j<i; j++)
+           {
+            row[j]= result[i-1][j-1] + result[i-1][j];
+
+           }
+           result.push_back(row);
+
+        }
+
+        return result;
+        
+    }
+};
