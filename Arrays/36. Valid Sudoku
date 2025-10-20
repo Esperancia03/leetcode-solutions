@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        
+     vector<set<char>> rows(9);
+     vector<set<char>> cols(9);
+     vector<set<char>> boxes(9);
+
+     for(int r=0; r<9; r++)
+     {
+        for(int c=0; c<9; c++)
+        {
+            char val = board[r][c];
+            if(val == '.') continue;
+
+            //check if the board has elements that are less than 1 or greater than 9
+            if(val < '1' || val> '9') return false;
+
+            if(rows[r].count(val))return false;
+            if(cols[c].count(val)) return false;
+
+            int for_one_box= ((r/3)*3) + (c/3);
+            if(boxes[for_one_box].count(val))return false;
+
+            rows[r].insert(val);
+            cols[c].insert(val);
+            boxes[for_one_box].insert(val);
+        }
+
+     }
+      return true;
+    }
+};
