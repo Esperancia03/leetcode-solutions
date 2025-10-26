@@ -1,0 +1,43 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+
+        sort(candidates.begin(), candidates.end());
+            vector<vector<int>>results;
+        vector<int>current;
+        
+        backtrack(0, 0, target, candidates, current, results);
+        
+        return results;
+    }
+private:
+    void backtrack(int start, int sum_so_far, int target, vector<int>& candidates,  vector<int>& current, vector<vector<int>>& results)
+    {
+    
+        //found a vailid combination
+        if(sum_so_far== target)
+        {
+    results.push_back(current);
+}
+        //if the sum exceed the target
+        if(sum_so_far> target) return;
+            
+            for(int i=start; i<candidates.size(); i++) 
+            {
+      
+        int val= candidates[i];
+        
+    if(sum_so_far + val > target) break;
+        
+        current.push_back(val);
+                
+                //since we can use i many times
+                backtrack(i, sum_so_far+val, target, candidates, current, results);
+
+                    current.pop_back();
+                    
+}
+       
+}
+
+    
